@@ -4,14 +4,14 @@ import type { Config } from '../types.js';
 import { sendDmPrompts } from './dmPrompt.js';
 import { postStandup } from './standupPost.js';
 
-function timeToCron(time: string): string {
+function timeToCron(time: string, days: string): string {
   const [hour, minute] = time.split(':');
-  return `${minute} ${hour} * * 1-5`;
+  return `${minute} ${hour} * * ${days}`;
 }
 
 export function scheduleCronJobs(client: Client, config: Config): void {
-  const dmCron = timeToCron(config.dmTime);
-  const standupCron = timeToCron(config.standupTime);
+  const dmCron = timeToCron(config.dmTime, config.standupDays);
+  const standupCron = timeToCron(config.standupTime, config.standupDays);
 
   cron.schedule(dmCron, () => sendDmPrompts(client, config), {
     timezone: 'Europe/Berlin',
@@ -21,5 +21,5 @@ export function scheduleCronJobs(client: Client, config: Config): void {
     timezone: 'Europe/Berlin',
   });
 
-  console.log(`Cron scheduled: DM prompts at ${config.dmTime} CET, standup at ${config.standupTime} CET (weekdays)`);
+  console.log(`Cron scheduled: DM prompts at ${config.dmTime} CET, standup at ${config.standupTime} CET (days: ${config.standupDays})`);
 }

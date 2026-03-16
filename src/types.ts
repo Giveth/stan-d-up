@@ -8,6 +8,7 @@ export interface Config {
   githubToken: string;
   githubRepos: string[];
   adminUserId: string;
+  standupDays: string;
 }
 
 export interface GitHubReference {

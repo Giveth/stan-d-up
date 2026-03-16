@@ -105,9 +105,10 @@ DISCORD_ROLE_ID=123456789012345678
 DISCORD_OUTPUT_CHANNEL_ID=123456789012345678
 ADMIN_USER_ID=123456789012345678
 
-# Schedule (HH:mm in CET — runs weekdays only)
+# Schedule (HH:mm in CET)
 DM_TIME=09:00
 STANDUP_TIME=12:00
+STANDUP_DAYS=MON,TUE,WED,THU,FRI
 
 # GitHub
 GITHUB_TOKEN=ghp_your-token-here
@@ -121,8 +122,9 @@ GITHUB_REPOS=your-org/repo1,your-org/repo2
 | `DISCORD_ROLE_ID`           | The role ID — members with this role will be prompted for updates |
 | `DISCORD_OUTPUT_CHANNEL_ID` | The channel where compiled standups are posted                    |
 | `ADMIN_USER_ID`             | Your Discord user ID — only this user can run admin commands       |
-| `DM_TIME`                   | Time to DM contributors (HH:mm, CET timezone, weekdays)           |
-| `STANDUP_TIME`              | Time to post the compiled standup (HH:mm, CET timezone, weekdays) |
+| `DM_TIME`                   | Time to DM contributors (HH:mm, CET timezone)                     |
+| `STANDUP_TIME`              | Time to post the compiled standup (HH:mm, CET timezone)            |
+| `STANDUP_DAYS`              | Comma-separated days to run: `MON,TUE,WED,THU,FRI` (default: weekdays) |
 | `GITHUB_TOKEN`              | GitHub personal access token for API access                       |
 | `GITHUB_REPOS`              | Comma-separated list of `owner/repo` to track                     |
 
@@ -196,4 +198,4 @@ src/
 
 ## License
 
-MIT
+This project is licensed under the GNU General Public License v3.0. See [LICENSE](LICENSE) for details.
