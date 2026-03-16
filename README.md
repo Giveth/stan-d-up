@@ -1,4 +1,4 @@
-# Standup Bot
+# Stan D. Up
 
 A Discord bot that automates daily standups with GitHub integration. It DMs contributors at a scheduled time to collect updates, then compiles and posts them to a designated channel.
 
@@ -115,18 +115,18 @@ GITHUB_TOKEN=ghp_your-token-here
 GITHUB_REPOS=your-org/repo1,your-org/repo2
 ```
 
-| Variable                    | Description                                                       |
-| --------------------------- | ----------------------------------------------------------------- |
-| `DISCORD_TOKEN`             | Bot token from the Discord Developer Portal                       |
-| `DISCORD_SERVER_ID`         | The guild (server) ID where the bot operates                      |
-| `DISCORD_ROLE_ID`           | The role ID — members with this role will be prompted for updates |
-| `DISCORD_OUTPUT_CHANNEL_ID` | The channel where compiled standups are posted                    |
-| `ADMIN_USER_ID`             | Your Discord user ID — only this user can run admin commands       |
-| `DM_TIME`                   | Time to DM contributors (HH:mm, CET timezone)                     |
-| `STANDUP_TIME`              | Time to post the compiled standup (HH:mm, CET timezone)            |
+| Variable                    | Description                                                            |
+| --------------------------- | ---------------------------------------------------------------------- |
+| `DISCORD_TOKEN`             | Bot token from the Discord Developer Portal                            |
+| `DISCORD_SERVER_ID`         | The guild (server) ID where the bot operates                           |
+| `DISCORD_ROLE_ID`           | The role ID — members with this role will be prompted for updates      |
+| `DISCORD_OUTPUT_CHANNEL_ID` | The channel where compiled standups are posted                         |
+| `ADMIN_USER_ID`             | Your Discord user ID — only this user can run admin commands           |
+| `DM_TIME`                   | Time to DM contributors (HH:mm, CET timezone)                          |
+| `STANDUP_TIME`              | Time to post the compiled standup (HH:mm, CET timezone)                |
 | `STANDUP_DAYS`              | Comma-separated days to run: `MON,TUE,WED,THU,FRI` (default: weekdays) |
-| `GITHUB_TOKEN`              | GitHub personal access token for API access                       |
-| `GITHUB_REPOS`              | Comma-separated list of `owner/repo` to track                     |
+| `GITHUB_TOKEN`              | GitHub personal access token for API access                            |
+| `GITHUB_REPOS`              | Comma-separated list of `owner/repo` to track                          |
 
 ## Usage
 
@@ -150,12 +150,12 @@ npm run start:prod
 
 ### Slash Commands
 
-| Command            | Description                                                                                                    |
-| ------------------ | -------------------------------------------------------------------------------------------------------------- |
-| `/github-issue`    | Browse and reference GitHub issues from connected repos. Has autocomplete for repo selection and issue search. |
-| `/test-prompt`     | Manually trigger the DM standup prompt (admin only)                                                            |
-| `/test-standup`    | Manually trigger the compiled standup post (admin only)                                                        |
-| `/standup-status`  | Show current cycle status: who was prompted, who responded, who's pending (admin only)                         |
+| Command           | Description                                                                                                    |
+| ----------------- | -------------------------------------------------------------------------------------------------------------- |
+| `/github-issue`   | Browse and reference GitHub issues from connected repos. Has autocomplete for repo selection and issue search. |
+| `/test-prompt`    | Manually trigger the DM standup prompt (admin only)                                                            |
+| `/test-standup`   | Manually trigger the compiled standup post (admin only)                                                        |
+| `/standup-status` | Show current cycle status: who was prompted, who responded, who's pending (admin only)                         |
 
 ### Testing the Bot
 
