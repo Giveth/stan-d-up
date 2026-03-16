@@ -1,0 +1,7 @@
+import type { StandupUpdate } from './types.js';
+export declare function resetCycle(): void;
+export declare function addUpdate(update: StandupUpdate): void;
+export declare function getUpdates(): StandupUpdate[];
+export declare function markPrompted(userId: string): void;
+export declare function isPrompted(userId: string): boolean;
+export declare function hasResponded(userId: string): boolean;
