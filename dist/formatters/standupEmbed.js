@@ -11,12 +11,14 @@ function formatUpdateField(update) {
         const refs = update.githubRefs.map(formatGitHubRef).join('\n');
         value += `\n\n**Referenced:**\n${refs}`;
     }
+    // Add a visual separator at the end for distinction between users
+    value += '\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500';
     // Truncate to Discord's field value limit
     if (value.length > 1024) {
         value = value.slice(0, 1021) + '...';
     }
     return {
-        name: update.displayName,
+        name: `\u{1f4cb} ${update.displayName}`,
         value,
     };
 }
@@ -56,14 +58,14 @@ export function buildStandupEmbeds(updates, activitySummary) {
                 .slice(0, 10)
                 .map((pr) => `- [${pr.repo}: ${pr.title}](${pr.url}) by ${pr.author}`)
                 .join('\n');
-            sections.push(`**Open PRs:**\n${prList}`);
+            sections.push(`\u{1f501} **Open PRs:**\n${prList}`);
         }
         if (activitySummary.issues.length > 0) {
             const issueList = activitySummary.issues
                 .slice(0, 10)
                 .map((i) => `- [${i.repo}#${i.number}: ${i.title}](${i.url})`)
                 .join('\n');
-            sections.push(`**Recent Issues:**\n${issueList}`);
+            sections.push(`\u{1f4dd} **Recent Issues:**\n${issueList}`);
         }
         if (sections.length > 0) {
             let activityValue = sections.join('\n\n');
@@ -74,7 +76,7 @@ export function buildStandupEmbeds(updates, activitySummary) {
                 embeds.push(currentEmbed);
                 currentEmbed = new EmbedBuilder().setColor(0x5865f2);
             }
-            currentEmbed.addFields({ name: 'GitHub Activity', value: activityValue });
+            currentEmbed.addFields({ name: '\u{1f4e6} GitHub Activity', value: activityValue });
         }
     }
     currentEmbed.setFooter({ text: `${updates.length} update(s) collected` });

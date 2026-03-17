@@ -31,8 +31,14 @@ export async function postStandup(client: Client, config: Config): Promise<void>
 
   const embeds = buildStandupEmbeds(updates, activitySummary);
 
-  for (const embed of embeds) {
-    await channel.send({ embeds: [embed] });
+  // Send the first embed with a role mention so everyone gets notified
+  const roleMention = `<@&${config.roleId}>`;
+  for (let i = 0; i < embeds.length; i++) {
+    if (i === 0) {
+      await channel.send({ content: roleMention, embeds: [embeds[i]] });
+    } else {
+      await channel.send({ embeds: [embeds[i]] });
+    }
   }
 
   console.log(`Standup posted with ${updates.length} updates.`);
