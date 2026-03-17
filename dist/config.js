@@ -42,4 +42,5 @@ export const config = Object.freeze({
         .filter(Boolean),
     adminUserId: requireEnv('ADMIN_USER_ID'),
     standupDays: parseStandupDays(process.env['STANDUP_DAYS'] || 'MON,TUE,WED,THU,FRI'),
+    asyncMode: process.env['ASYNC_MODE']?.toLowerCase() === 'true',
 });

@@ -9,6 +9,7 @@ export interface Config {
   githubRepos: string[];
   adminUserId: string;
   standupDays: string;
+  asyncMode: boolean;
 }
 
 export interface GitHubReference {

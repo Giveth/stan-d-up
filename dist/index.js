@@ -8,8 +8,13 @@ client.once('ready', async () => {
     console.log(`Logged in as ${client.user?.tag}`);
     await registerCommands(config);
     setupCommandHandler(client, config);
-    setupDmCollector(client, config);
     scheduleCronJobs(client, config);
-    console.log('Standup bot is ready!');
+    if (config.asyncMode) {
+        setupDmCollector(client, config);
+        console.log('Standup bot is ready! (async mode)');
+    }
+    else {
+        console.log('Standup bot is ready! (sync mode)');
+    }
 });
 client.login(config.discordToken);
