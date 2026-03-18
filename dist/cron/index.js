@@ -2,9 +2,15 @@ import cron from 'node-cron';
 import { sendDmPrompts } from './dmPrompt.js';
 import { postStandup } from './standupPost.js';
 import { postStandupCall } from './standupCall.js';
+import { sendSyncFollowUp } from './syncFollowUp.js';
 function timeToCron(time, days) {
     const [hour, minute] = time.split(':');
     return `${minute} ${hour} * * ${days}`;
+}
+function addHours(time, hours) {
+    const [h, m] = time.split(':').map(Number);
+    const newH = (h + hours) % 24;
+    return `${String(newH).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
 export function scheduleCronJobs(client, config) {
     const standupCron = timeToCron(config.standupTime, config.standupDays);
@@ -20,10 +26,16 @@ export function scheduleCronJobs(client, config) {
         console.log(`Async mode: DM prompts at ${config.dmTime} CET, standup at ${config.standupTime} CET (days: ${config.standupDays})`);
     }
     else {
-        // Sync mode: just ping the role at standup time to post in the channel
+        // Sync mode: DM users to post in the channel, post activity summary
         cron.schedule(standupCron, () => postStandupCall(client, config), {
             timezone: 'Europe/Berlin',
         });
-        console.log(`Sync mode: standup call at ${config.standupTime} CET (days: ${config.standupDays})`);
+        // Follow-up 2 hours later for anyone who hasn't posted
+        const followUpTime = addHours(config.standupTime, 2);
+        const followUpCron = timeToCron(followUpTime, config.standupDays);
+        cron.schedule(followUpCron, () => sendSyncFollowUp(client, config), {
+            timezone: 'Europe/Berlin',
+        });
+        console.log(`Sync mode: standup call at ${config.standupTime} CET, follow-up at ${followUpTime} CET (days: ${config.standupDays})`);
     }
 }

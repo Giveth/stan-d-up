@@ -5,3 +5,7 @@ export declare function getUpdates(): StandupUpdate[];
 export declare function markPrompted(userId: string): void;
 export declare function isPrompted(userId: string): boolean;
 export declare function hasResponded(userId: string): boolean;
+export declare function resetSyncCycle(): void;
+export declare function markCalled(userId: string): void;
+export declare function markPostedInChannel(userId: string): void;
+export declare function getCalledButNotPosted(): string[];

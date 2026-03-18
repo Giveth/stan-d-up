@@ -32,3 +32,21 @@ export function isPrompted(userId) {
 export function hasResponded(userId) {
     return store.updates.has(userId);
 }
+// Sync mode: track which role members were called and who posted in the channel
+const syncStore = {
+    calledUsers: new Set(),
+    postedUsers: new Set(),
+};
+export function resetSyncCycle() {
+    syncStore.calledUsers.clear();
+    syncStore.postedUsers.clear();
+}
+export function markCalled(userId) {
+    syncStore.calledUsers.add(userId);
+}
+export function markPostedInChannel(userId) {
+    syncStore.postedUsers.add(userId);
+}
+export function getCalledButNotPosted() {
+    return Array.from(syncStore.calledUsers).filter((id) => !syncStore.postedUsers.has(id));
+}
